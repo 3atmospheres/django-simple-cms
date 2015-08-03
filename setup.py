@@ -30,7 +30,6 @@ setup(
         'django',
         'django-extensions',
         'django-taggit',
-        'PIL',
         'django-positions',
     ],
 )
