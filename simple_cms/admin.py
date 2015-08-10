@@ -61,6 +61,7 @@ class NavigationAdmin(admin.ModelAdmin):
                 'render_as_template',
                 'homepage',
                 'inherit_blocks',
+                ('dropdown', 'dropdown_title'),
                 ('url', 'target'),
                 ('view', 'template', 'inherit_template'),
                 ('redirect_url', 'redirect_permanent'),
