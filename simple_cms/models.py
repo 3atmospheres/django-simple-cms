@@ -158,6 +158,8 @@ class Navigation(TextMixin, CommonAbstractModel):
     order = PositionField(collection=('parent', 'site'))
     site = models.ForeignKey(Site, related_name='pages')
     homepage = models.BooleanField(default=False)
+    dropdown = models.BooleanField(default=False, help_text='Display dropdown menu')
+    dropdown_title = models.CharField(max_length=255, help_text='Title to display in the dropdown menu', blank=True, null=True)
     url = models.CharField(max_length=255, blank=True, default='', help_text='eg. link somewhere else http://awesome.com/ or /awesome/page/')
     target = models.CharField(max_length=255, blank=True, default='', help_text='eg. open link in "_blank" window', choices=TARGET_CHOICES)
     page_title = models.CharField(max_length=255, blank=True, default='', help_text='Optional html title')
