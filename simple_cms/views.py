@@ -123,7 +123,7 @@ class ArticleSearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleSearchView, self).get_context_data(**kwargs)
-        context['query'] = self.form.cleaned_data['q']
+        context['query'] = self.form.cleaned_data.get('q', '')
         context['article_search_form'] = self.form
         return context
 
