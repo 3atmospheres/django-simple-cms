@@ -1,7 +1,8 @@
 from django import template
 from django.template import Node
-from django.db.models import get_model
 from django.contrib.sites.models import Site
+
+from simple_cms.compat import get_model
 
 register = template.Library()
 
