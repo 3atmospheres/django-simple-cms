@@ -1,6 +1,6 @@
 from django import template
 from django.template import Node
-from django.db.models import get_model
+from django.apps import apps
 from django.contrib.sites.models import Site
 
 register = template.Library()
@@ -16,7 +16,7 @@ class ModelObjectsNode(template.Node):
     def render(self, context):
         limit = self.limit
         m = self.model.resolve(context).split('.')
-        model = get_model(m[0], m[1])
+        model = apps.get_model(m[0], m[1])
         try:
             # this is an assumption based on our models all being basedon on CommonAbstractModel
             context[self.var_name] = model.objects.filter(active=True)[:limit]

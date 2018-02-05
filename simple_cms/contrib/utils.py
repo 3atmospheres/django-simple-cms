@@ -1,9 +1,9 @@
 import re
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 
 def render_with(template, logged_in_template=None):
@@ -21,9 +21,7 @@ def render_with(template, logged_in_template=None):
             output = func(request, *args, **kw)
             
             if isinstance(output, dict):
-                return render_to_response(
-                    template_to_render, output,
-                    RequestContext(request, output))
+                return render(request, template_to_render, output)
             return output
         return wrapper
     return renderer
