@@ -100,8 +100,8 @@ def get_blocks(parser, token):
     try:
         tag_name, arg = token.contents.split(None, 1)
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires arguments" % \
-                token.contents.split()[0]
+        raise template.TemplateSyntaxError(
+            "%r tag requires arguments" % token.contents.split()[0])
     bits = arg.split()
     len_bits = len(bits)
     if len_bits == 5:
@@ -109,7 +109,7 @@ def get_blocks(parser, token):
     if len_bits == 4:
         return NavigationBlocksNode(bits[1], bits[3])
     
-    raise TemplateSyntaxError, "get_blocks for nav [group] as varname"
+    raise TemplateSyntaxError("get_blocks for nav [group] as varname")
     
 class ArticleSearchFormNode(template.Node):
     def __init__(self, var_name):
@@ -124,8 +124,8 @@ def get_article_search_form(parser, token):
     try:
         tag_name, arg = token.contents.split(None, 1)
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires arguments" % \
-                token.contents.split()[0]
+        raise template.TemplateSyntaxError(
+            "%r tag requires arguments" % token.contents.split()[0])
     bits = arg.split()
     return ArticleSearchFormNode(bits[1])
 

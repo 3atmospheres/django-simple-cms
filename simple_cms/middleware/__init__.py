@@ -2,7 +2,7 @@ from simple_cms.models import Navigation
 from simple_cms.views import NavigationView
 from django.http import Http404
 from django.conf import settings
-from django.utils.functional import update_wrapper
+from functools import update_wrapper
 
 class NavigationMiddleware(object):
     def process_response(self, request, response):

@@ -36,19 +36,19 @@ def get_model_objects(parser, token):
     try:
         tag_name, arg = token.contents.split(None, 1)
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires arguments" % \
-                token.contents.split()[0]
+        raise template.TemplateSyntaxError(
+            "%r tag requires arguments" % token.contents.split()[0])
     bits = arg.split()
     len_bits = len(bits)
     if len_bits not in (4, 5, 6):
-        raise template.TemplateSyntaxError, "%r tag had invaild arguments: %s" % (
-                tag_name, arg)
+        raise template.TemplateSyntaxError(
+            "%r tag had invaild arguments: %s" % (tag_name, arg))
     if bits[0] != 'for':
-        raise template.TemplateSyntaxErorr, "First argument to %r must be 'for'" % \
-                tag_name
+        raise template.TemplateSyntaxError(
+            "First argument to %r must be 'for'" % tag_name)
     if bits[2] != 'as':
-        raise template.TemplateSyntaxErorr, "Third argument to %r must be 'as'" % \
-                tag_name
+        raise template.TemplateSyntaxError(
+            "Third argument to %r must be 'as'" % tag_name)
     
     if 3 < len_bits < 7:
         if bits[4] == 'limit':
@@ -76,7 +76,7 @@ def sorl_format(parser, token):
         tag_name, arg = token.contents.split(None, 1)
         args = arg.split()
     except ValueError:
-        raise template.TemplateSyntaxError, 'syntax error'
+        raise template.TemplateSyntaxError('syntax error')
     return SorlNode(args[0], args[2])
 
 class ExternalNode(template.Node):
@@ -105,7 +105,7 @@ def is_external_url(parser, token):
         tag_name, arg = token.contents.split(None, 1)
         args = arg.split()
     except ValueError:
-        raise template.TemplateSyntaxError, 'syntax error'
+        raise template.TemplateSyntaxError('syntax error')
     return ExternalNode(args[0], args[2])
 
 # http://djangosnippets.org/snippets/660/
@@ -144,7 +144,7 @@ def columns(lst, cols):
         raise StopIteration()
     
     start = 0
-    for i in xrange(cols):
+    for i in range(cols):
         stop = start + len(lst[i::cols])
         yield lst[start:stop]
         start = stop
@@ -154,7 +154,7 @@ def split_list(parser, token):
     """<% split_list list as new_list 5 %>"""
     bits = token.contents.split()
     if len(bits) != 5:
-        raise TemplateSyntaxError, "split_list list as new_list 5"
+        raise TemplateSyntaxError("split_list list as new_list 5")
     return SplitListNode(bits[1], bits[4], bits[3])
 
 class PathNode(template.Node):
@@ -176,7 +176,7 @@ class PathNode(template.Node):
         urls = url.strip('/').split('/')
         
         matches = 0
-        for i in xrange(0, depth):
+        for i in range(0, depth):
             try:
                 if paths[i] == urls[i]:
                     matches += 1
@@ -193,5 +193,6 @@ def path_in_url(parser, token):
     try:
         args = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires arguments" % token.contents.split()[0]
+        raise template.TemplateSyntaxError(
+            "%r tag requires arguments" % token.contents.split()[0])
     return PathNode(args[1], args[2], args[4])

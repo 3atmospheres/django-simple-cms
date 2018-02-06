@@ -124,7 +124,7 @@ def navigation(request):
         tA = module.split('.')
         c = tA.pop()
         import_string = 'from %s import %s' % ('.'.join(tA), c)
-        exec import_string
+        exec(import_string)
         cls = eval(c)
     except (AttributeError, ImportError):
         cls = NavigationHelper
