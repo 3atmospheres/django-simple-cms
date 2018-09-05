@@ -84,8 +84,8 @@ class Seo(models.Model):
         unique_together = ['content_type', 'object_id']
         verbose_name_plural = 'Seo'
 
-    def __unicode__(self):
-        return u'%s' % self.id
+    def __str__(self):
+        return '%s' % self.id
 
 class BlockGroup(models.Model):
     title = models.CharField(max_length=255)
@@ -93,8 +93,8 @@ class BlockGroup(models.Model):
     class Meta:
         ordering = ('title',)
 
-    def __unicode__(self):
-        return u'%s' % self.title
+    def __str__(self):
+        return '%s' % self.title
 
 class Block(TextMixin, UrlMixin, CommonAbstractModel):
     key = models.CharField(max_length=255, unique=True, help_text='Internal name to refer to this item')
@@ -112,8 +112,8 @@ class Block(TextMixin, UrlMixin, CommonAbstractModel):
     object_id = models.PositiveIntegerField(blank=True, null=True, help_text="""Type in the ID of the item you want to choose. You should see the title appear beside the box.""")
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    def __unicode__(self):
-        return u'%s' % (self.key)
+    def __str_(self):
+        return '%s' % (self.key)
 
 class RelatedBlock(CommonAbstractModel):
     """ Linking Blocks to any object """
@@ -134,8 +134,8 @@ class RelatedBlock(CommonAbstractModel):
     class Meta:
         ordering = ['order', ]
 
-    def __unicode__(self):
-        return u'%s - %s' % (self.content_object, self.block)
+    def __str__(self):
+        return '%s - %s' % (self.content_object, self.block)
 
 class NavigationGroup(models.Model):
     title = models.CharField(max_length=255)
@@ -143,8 +143,8 @@ class NavigationGroup(models.Model):
     class Meta:
         ordering = ('title',)
 
-    def __unicode__(self):
-        return u'%s' % self.title
+    def __str__(self):
+        return '%s' % self.title
 
 class Navigation(TextMixin, CommonAbstractModel):
     """
@@ -180,8 +180,8 @@ class Navigation(TextMixin, CommonAbstractModel):
         ordering = ['title']
         verbose_name_plural = 'Navigation'
 
-    def __unicode__(self):
-        return u'%s' % self._chain()
+    def __str__(self):
+        return '%s' % self._chain()
 
     def clean(self):
         from django.core.exceptions import ValidationError
@@ -281,8 +281,8 @@ class Category(CommonAbstractModel):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
-    def __unicode__(self):
-        return u'%s' % self.title
+    def __str__(self):
+        return '%s' % self.title
 
 class PublishedManager(CommonAbstractManager):
 
@@ -320,8 +320,8 @@ class Article(TextMixin, UrlMixin, CommonAbstractModel):
     class Meta:
         ordering = ['-post_date']
 
-    def __unicode__(self):
-        return u'%s' % self.title
+    def __str__(self):
+        return '%s' % self.title
 
     def has_excerpt(self):
         if self.excerpt != '':
@@ -353,8 +353,8 @@ class Venue(CommonAbstractModel):
     class Meta:
         ordering = ['name']
 
-    def __unicode__(self):
-        return u'%s' % self.name
+    def __str__(self):
+        return '%s' % self.name
 
     @property
     def map_address(self):
@@ -402,8 +402,8 @@ class Event(TextMixin, CommonAbstractModel):
     class Meta:
         ordering = ['start_datetime', 'end_datetime']
 
-    def __unicode__(self):
-        return u'%s' % (self.pk)
+    def __str__(self):
+        return '%s' % (self.pk)
 
     @property
     def is_past(self):

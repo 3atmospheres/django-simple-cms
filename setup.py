@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 
-import sys
-
 try:
-    from setuptools import setup, find_packages, Command
+    from setuptools import setup, find_packages
 except ImportError:
     from ez_setup import use_setuptools
     use_setuptools()
-    from setuptools import setup, find_packages, Command
+    from setuptools import setup, find_packages
 
 setup(
     name='django-simple-cms',
-    version='0.3.40-3atm.5',
+    version='0.3.40',
     description='Simple CMS for your django powered website',
     author='Charles Mastin',
     author_email='c@charlesmastin.com',
